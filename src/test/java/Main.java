@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         new Config();
 
-        new PteroAPI(Config.getBaseURL(), Config.getKey(), true);
+        new PteroAPI(Config.getBaseURL(), Config.getKey());
     }
 
 }

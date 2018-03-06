@@ -1,11 +1,14 @@
 package com.stanjg.ptero4j;
 
+import com.stanjg.ptero4j.entities.User;
+import com.stanjg.ptero4j.exceptions.NoPermissionException;
+import com.stanjg.ptero4j.exceptions.NotFoundException;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.internal.http.HttpMethod;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -13,12 +16,10 @@ public class PteroAPI {
 
     private OkHttpClient client;
     private String baseURL, key;
-    private boolean admin;
 
-    public PteroAPI(String baseURL, String key, boolean admin) {
+    public PteroAPI(String baseURL, String key) {
         this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/application" : baseURL + "/api/application";
         this.key = "Bearer " + key;
-        this.admin = admin;
         this.client = new OkHttpClient();
 
         try {
@@ -26,17 +27,42 @@ public class PteroAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        PteroUtils.log(getUser(1).getEmail());
+    }
+
+    public User getUser(int id) {
+
+        try {
+            Response response = makeApiCall("/users/"+id, HTTPMethod.GET);
+
+            if (response.code() != 200) {
+                if (response.code() == 404)
+                    throw new NotFoundException("A user with id " + id + " was not found!");
+
+                return null;
+            }
+
+            JSONObject json = new JSONObject(response.body().string()).getJSONObject("attributes");
+
+            return new User(json);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private void testConnection() throws IOException {
-        Response response = makeApiCall(admin ? "/users" : "/", HTTPMethod.GET);
+        Response response = makeApiCall("/users", HTTPMethod.GET);
 
 
         switch (response.code()) {
 
             case 200:
                 PteroUtils.log("Ptero4J loaded! Successfully made contact with the panel.");
-                break;
+                return;
             case 401:
                 PteroUtils.log("Ptero4J failed to load! Unable to authenticated. Your key might be invalid.");
                 break;
