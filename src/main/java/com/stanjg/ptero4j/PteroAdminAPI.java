@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j;
 
+import com.stanjg.ptero4j.controllers.admin.GenericController;
 import com.stanjg.ptero4j.controllers.admin.ServersController;
 import com.stanjg.ptero4j.controllers.TestController;
 import com.stanjg.ptero4j.controllers.admin.UsersController;
@@ -12,6 +13,7 @@ public class PteroAdminAPI {
 
     private UsersController usersController;
     private ServersController serversController;
+    private GenericController genericController;
 
     public PteroAdminAPI(String baseURL, String key) {
 
@@ -26,6 +28,7 @@ public class PteroAdminAPI {
 
         this.usersController = new UsersController(this, this.baseURL, this.key);
         this.serversController = new ServersController(this, this.baseURL, this.key);
+        this.genericController = new GenericController(this, this.baseURL, this.key);
     }
 
     public UsersController getUsersController() {
@@ -34,5 +37,9 @@ public class PteroAdminAPI {
 
     public ServersController getServersController() {
         return serversController;
+    }
+
+    public GenericController getGenericController() {
+        return genericController;
     }
 }

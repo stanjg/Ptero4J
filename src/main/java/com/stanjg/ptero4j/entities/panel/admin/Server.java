@@ -1,12 +1,15 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.actions.GenericAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.controllers.admin.GenericController;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.ServerContainer;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
+import com.stanjg.ptero4j.util.HTTPMethod;
 import org.json.JSONObject;
 
 public class Server {
@@ -85,6 +88,26 @@ public class Server {
 
     public ServerUpdateStartupAction editStartup() {
         return new ServerUpdateStartupAction(api, this);
+    }
+
+    public boolean suspend() {
+        return new GenericAction(api, "/servers/"+this.shortId+"/suspend", HTTPMethod.POST).execute() == 204;
+    }
+
+    public boolean unsuspend() {
+        return new GenericAction(api, "/servers/"+this.shortId+"/unsuspend", HTTPMethod.POST).execute() == 204;
+    }
+
+    public boolean reinstall() {
+        return new GenericAction(api, "/servers/"+this.shortId+"/reinstall", HTTPMethod.POST).execute() == 204;
+    }
+
+    public boolean rebuild() {
+        return new GenericAction(api, "/servers/"+this.shortId+"/rebuild", HTTPMethod.POST).execute() == 204;
+    }
+
+    public boolean delete() {
+        return new GenericAction(api, "/servers/"+this.shortId, HTTPMethod.DELETE).execute() == 204;
     }
 
     public User getOwner() {

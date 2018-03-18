@@ -86,6 +86,15 @@ public abstract class Controller {
 
                     response = client.newCall(patchBuilder.build()).execute();
                     return response;
+
+                case DELETE:
+                    Request.Builder deleteBuilder = new Request.Builder()
+                            .url(baseURL + endpoint)
+                            .delete();
+                    addHeaders(deleteBuilder);
+
+                    response = client.newCall(deleteBuilder.build()).execute();
+                    return response;
             }
 
         } catch (Exception exc) {

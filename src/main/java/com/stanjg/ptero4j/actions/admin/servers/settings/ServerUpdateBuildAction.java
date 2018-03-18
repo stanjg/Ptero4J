@@ -1,4 +1,4 @@
-package com.stanjg.ptero4j.actions.admin.servers;
+package com.stanjg.ptero4j.actions.admin.servers.settings;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.PteroAction;
@@ -92,7 +92,7 @@ public class ServerUpdateBuildAction implements PteroAction<Server> {
 
     @Override
     public Server execute() {
-        return api.getServersController().executeUpdate(this);
+        return api.getServersController().executeAction(this);
     }
 
     @Override

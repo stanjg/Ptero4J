@@ -2,9 +2,9 @@ package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.PteroAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateStartupAction;
 import com.stanjg.ptero4j.controllers.Controller;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
@@ -35,7 +35,7 @@ public class ServersController extends Controller {
         return new ServerUpdateStartupAction(getAdminAPI(), id);
     }
 
-    public Server executeUpdate(PteroAction action) {
+    public Server executeAction(PteroAction action) {
 
         JSONObject data = action.getAsJSON();
 
@@ -43,7 +43,6 @@ public class ServersController extends Controller {
 
             Response response = makeApiCall(action.getEndpoint(), action.getMethod(), data);
             if (response.code() != 200) {
-                System.out.println(response.body().string());
                 PteroUtils.logRequestError(response);
                 return null;
             }
