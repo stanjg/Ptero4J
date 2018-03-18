@@ -1,4 +1,4 @@
-package com.stanjg.ptero4j.entities;
+package com.stanjg.ptero4j.entities.panel;
 
 import org.json.JSONObject;
 
