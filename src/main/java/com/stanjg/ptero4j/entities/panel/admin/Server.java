@@ -1,6 +1,6 @@
-package com.stanjg.ptero4j.entities.panel;
+package com.stanjg.ptero4j.entities.panel.admin;
 
-import com.stanjg.ptero4j.PteroAPI;
+import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.entities.objects.server.ServerContainer;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
 import org.json.JSONObject;
@@ -63,7 +63,7 @@ public class Server {
     }
 
     public User getOwner() {
-        return PteroAPI.getInstance().getUsersController().getUser(this.ownerId);
+        return PteroAdminAPI.getInstance().getUsersController().getUser(this.ownerId);
     }
 
     public String getLongId() {

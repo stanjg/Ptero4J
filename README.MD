@@ -6,7 +6,7 @@ A java library to interact with the Admin API of [Pterodactyl Panel](https://git
 
 ### Few examples
 ```java
-PteroAPI api = new PteroAPI("panel.pterodactyl.io", "api key here");
+PteroAdminAPI api = new PteroAdminAPI("panel.pterodactyl.io", "api key here");
 
 List<Server> servers = api.getServersController().getServers();
 List<User> users = api.getUsersController().getUsers();
@@ -18,7 +18,8 @@ List<Server> serversFromUser = api.getUsersController().getUser("email@email.com
 _This library is not persistent! Every time you call a method on a controller a new API call will be made, so be aware of that!_
 Example:
 ```java
-// This way of retrieving a users servers takes 2 API calls, one to fetch the user, and another one to fetch the servers
+// This way of retrieving a users servers takes 2 API calls. 
+// One to fetch the user, and another one to fetch the servers
 api.getUsersController.getUser(88).getServers();
 
 // If you already have the ID of the user this would be a better way:

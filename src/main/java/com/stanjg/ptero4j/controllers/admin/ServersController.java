@@ -1,6 +1,7 @@
-package com.stanjg.ptero4j.controllers;
+package com.stanjg.ptero4j.controllers.admin;
 
-import com.stanjg.ptero4j.entities.panel.Server;
+import com.stanjg.ptero4j.controllers.Controller;
+import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.Response;

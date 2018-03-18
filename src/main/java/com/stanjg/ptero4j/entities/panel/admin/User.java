@@ -1,6 +1,6 @@
-package com.stanjg.ptero4j.entities.panel;
+package com.stanjg.ptero4j.entities.panel.admin;
 
-import com.stanjg.ptero4j.PteroAPI;
+import com.stanjg.ptero4j.PteroAdminAPI;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class User {
     }
 
     public List<Server> getServers() {
-        return PteroAPI.getInstance().getServersController().getServersForUser(this.id);
+        return PteroAdminAPI.getInstance().getServersController().getServersForUser(this.id);
     }
 
     public int getId() {

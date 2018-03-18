@@ -1,15 +1,15 @@
 package com.stanjg.ptero4j;
 
-import com.stanjg.ptero4j.controllers.ServersController;
+import com.stanjg.ptero4j.controllers.admin.ServersController;
 import com.stanjg.ptero4j.controllers.TestController;
-import com.stanjg.ptero4j.controllers.UsersController;
+import com.stanjg.ptero4j.controllers.admin.UsersController;
 
 import java.io.IOException;
 
-public class PteroAPI {
+public class PteroAdminAPI {
 
-    private static PteroAPI instance;
-    public static PteroAPI getInstance() {
+    private static PteroAdminAPI instance;
+    public static PteroAdminAPI getInstance() {
         return instance;
     }
 
@@ -18,7 +18,7 @@ public class PteroAPI {
     private UsersController usersController;
     private ServersController serversController;
 
-    public PteroAPI(String baseURL, String key) {
+    public PteroAdminAPI(String baseURL, String key) {
         if (instance != null)
             return;
 
