@@ -7,11 +7,13 @@ import java.util.List;
 
 public class User {
 
+    private PteroAdminAPI api;
     private int id, externalId;
     private String uuid, username, email, firstName, lastName, language;
     private boolean root_admin, totpEnabled;
 
-    private User(int id, int externalId, String uuid, String username, String email, String firstName, String lastName, String language, boolean root_admin, boolean totpEnabled) {
+    private User(PteroAdminAPI api, int id, int externalId, String uuid, String username, String email, String firstName, String lastName, String language, boolean root_admin, boolean totpEnabled) {
+        this.api = api;
         this.id = id;
         this.externalId = externalId;
         this.uuid = uuid;
@@ -24,8 +26,9 @@ public class User {
         this.totpEnabled = totpEnabled;
     }
 
-    public User(JSONObject json) {
+    public User(PteroAdminAPI api, JSONObject json) {
         this(
+                api,
                 json.getInt("id"),
                 json.isNull("external_id") ? -1 : json.getInt("external_id"),
                 json.getString("uuid"),
@@ -40,7 +43,7 @@ public class User {
     }
 
     public List<Server> getServers() {
-        return PteroAdminAPI.getInstance().getServersController().getServersForUser(this.id);
+        return api.getServersController().getServersForUser(this.id);
     }
 
     public int getId() {

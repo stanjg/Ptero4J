@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j.controllers.admin;
 
+import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.controllers.Controller;
 import com.stanjg.ptero4j.entities.panel.admin.User;
 import com.stanjg.ptero4j.exceptions.NotFoundException;
@@ -15,8 +16,8 @@ import java.util.List;
 
 public class UsersController extends Controller {
 
-    public UsersController(String baseURL, String key) {
-        super(baseURL, key);
+    public UsersController(PteroAdminAPI api, String baseURL, String key) {
+        super(api, baseURL, key);
     }
 
     public List<User> getUsers(int page) {
@@ -113,7 +114,7 @@ public class UsersController extends Controller {
 
             JSONObject json = new JSONObject(response.body().string()).getJSONObject("attributes");
 
-            return new User(json);
+            return new User(getAdminAPI(), json);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -127,7 +128,7 @@ public class UsersController extends Controller {
         for (int j = 0; j < arr.length(); j ++) {
             JSONObject juser = arr.getJSONObject(j);
 
-            list.add(new User(juser.getJSONObject("attributes")));
+            list.add(new User(getAdminAPI(), juser.getJSONObject("attributes")));
         }
     }
 

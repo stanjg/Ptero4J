@@ -1,5 +1,7 @@
 package com.stanjg.ptero4j.controllers;
 
+import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.OkHttpClient;
@@ -10,10 +12,22 @@ import java.io.IOException;
 
 public abstract class Controller {
 
+    private PteroAdminAPI adminAPI;
+    private PteroUserAPI userAPI;
+
     private OkHttpClient client;
     private String baseURL, key;
 
-    public Controller(String baseURL, String key) {
+    public Controller(PteroAdminAPI api, String baseURL, String key) {
+        this.adminAPI = api;
+        this.baseURL = baseURL;
+        this.key = key;
+
+        this.client = new OkHttpClient();
+    }
+
+    public Controller(PteroUserAPI api, String baseURL, String key) {
+        this.userAPI = api;
         this.baseURL = baseURL;
         this.key = key;
 
@@ -45,5 +59,13 @@ public abstract class Controller {
         }
 
         throw new RuntimeException("Invalid Method");
+    }
+
+    protected PteroAdminAPI getAdminAPI() {
+        return adminAPI;
+    }
+
+    protected PteroUserAPI getUserAPI() {
+        return userAPI;
     }
 }

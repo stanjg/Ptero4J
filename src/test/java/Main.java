@@ -7,14 +7,14 @@ import util.Config;
 
 public class Main {
 
-    private static PteroUserAPI api;
+    private static PteroAdminAPI api;
 
     public static void main(String[] args) {
         new Config();
 
-        api = new PteroUserAPI(Config.getBaseURL(), Config.getKey());
+        api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
 
-        for (UserServer server : api.getServersController().getServers()) {
+        for (Server server : api.getUsersController().getUser(22).getServers()) {
             PteroUtils.log(server.getName());
         }
     }

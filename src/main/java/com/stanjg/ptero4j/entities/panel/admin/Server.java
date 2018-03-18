@@ -7,14 +7,16 @@ import org.json.JSONObject;
 
 public class Server {
 
+    private PteroAdminAPI api;
     private String longId, name, description, uuid;
     private int shortId, allocationId, eggId, nestId, externalId, packId, nodeId, ownerId;
     private boolean suspended;
     private ServerContainer container;
     private ServerLimits limits;
 
-    public Server(JSONObject json) {
+    public Server(PteroAdminAPI api, JSONObject json) {
         this(
+                api,
                 json.getString("identifier"),
                 json.getString("name"),
                 json.getString("description"),
@@ -37,14 +39,15 @@ public class Server {
         );
     }
 
-    private Server(String longId, String name,
-                   String description, String uuid,
-                   int shortId, int allocationId,
-                   int eggId, int nestId,
-                   int externalId, int packId,
-                   int nodeId, int ownerId,
-                   boolean suspended, ServerContainer container,
-                   ServerLimits limits) {
+    private Server(PteroAdminAPI api, String longId,
+                   String name, String description,
+                   String uuid, int shortId,
+                   int allocationId, int eggId,
+                   int nestId, int externalId,
+                   int packId, int nodeId,
+                   int ownerId, boolean suspended,
+                   ServerContainer container, ServerLimits limits) {
+        this.api = api;
         this.longId = longId;
         this.name = name;
         this.description = description;
@@ -63,7 +66,7 @@ public class Server {
     }
 
     public User getOwner() {
-        return PteroAdminAPI.getInstance().getUsersController().getUser(this.ownerId);
+        return api.getUsersController().getUser(this.ownerId);
     }
 
     public String getLongId() {

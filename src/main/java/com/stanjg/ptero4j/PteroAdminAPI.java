@@ -8,33 +8,24 @@ import java.io.IOException;
 
 public class PteroAdminAPI {
 
-    private static PteroAdminAPI instance;
-    public static PteroAdminAPI getInstance() {
-        return instance;
-    }
-
     private String baseURL, key;
 
     private UsersController usersController;
     private ServersController serversController;
 
     public PteroAdminAPI(String baseURL, String key) {
-        if (instance != null)
-            return;
-
-        instance = this;
 
         this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/application" : baseURL + "/api/application";
         this.key = "Bearer " + key;
 
         try {
-            new TestController(this.baseURL, this.key).testConnection();
+            new TestController(null, this.baseURL, this.key).testConnection();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        this.usersController = new UsersController(this.baseURL, this.key);
-        this.serversController = new ServersController(this.baseURL, this.key);
+        this.usersController = new UsersController(this, this.baseURL, this.key);
+        this.serversController = new ServersController(this, this.baseURL, this.key);
     }
 
     public UsersController getUsersController() {

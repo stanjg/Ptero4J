@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j.controllers.user;
 
+import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.controllers.Controller;
 import com.stanjg.ptero4j.entities.panel.user.UserServer;
 import com.stanjg.ptero4j.util.HTTPMethod;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class UserServersController extends Controller {
 
-    public UserServersController(String baseURL, String key) {
-        super(baseURL, key);
+    public UserServersController(PteroUserAPI api, String baseURL, String key) {
+        super(api, baseURL, key);
     }
 
     public List<UserServer> getServers() {
@@ -52,7 +53,7 @@ public class UserServersController extends Controller {
         for (int j = 0; j < arr.length(); j ++) {
             JSONObject jserver = arr.getJSONObject(j);
 
-            list.add(new UserServer(jserver.getJSONObject("attributes")));
+            list.add(new UserServer(getUserAPI(), jserver.getJSONObject("attributes")));
         }
     }
 

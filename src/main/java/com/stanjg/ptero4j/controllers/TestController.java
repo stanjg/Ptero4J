@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j.controllers;
 
+import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.Response;
@@ -8,8 +9,8 @@ import java.io.IOException;
 
 public class TestController extends Controller {
 
-    public TestController(String baseURL, String key) {
-        super(baseURL, key);
+    public TestController(PteroAdminAPI api, String baseURL, String key) {
+        super(api, baseURL, key);
     }
 
     public void testConnection() throws IOException {

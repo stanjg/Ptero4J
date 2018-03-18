@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j.controllers.admin;
 
+import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.controllers.Controller;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class ServersController extends Controller {
 
-    public ServersController(String baseURL, String key) {
-        super(baseURL, key);
+    public ServersController(PteroAdminAPI api, String baseURL, String key) {
+        super(api, baseURL, key);
     }
 
     public List<Server> getServers(int page) {
@@ -109,7 +110,7 @@ public class ServersController extends Controller {
 
             JSONObject json = new JSONObject(response.body().string()).getJSONObject("attributes");
 
-            return new Server(json);
+            return new Server(getAdminAPI(), json);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -136,7 +137,7 @@ public class ServersController extends Controller {
             List<Server> servers = new ArrayList<>();
 
             for (int i = 0; i < arr.length(); i++) {
-                servers.add(new Server(arr.getJSONObject(i).getJSONObject("attributes")));
+                servers.add(new Server(getAdminAPI(), arr.getJSONObject(i).getJSONObject("attributes")));
             }
 
             return servers;
@@ -153,7 +154,7 @@ public class ServersController extends Controller {
         for (int j = 0; j < arr.length(); j ++) {
             JSONObject jserver = arr.getJSONObject(j);
 
-            list.add(new Server(jserver.getJSONObject("attributes")));
+            list.add(new Server(getAdminAPI(), jserver.getJSONObject("attributes")));
         }
     }
 
