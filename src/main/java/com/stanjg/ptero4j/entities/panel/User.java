@@ -1,6 +1,9 @@
 package com.stanjg.ptero4j.entities.panel;
 
+import com.stanjg.ptero4j.PteroAPI;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class User {
 
@@ -34,6 +37,10 @@ public class User {
                 json.getBoolean("root_admin"),
                 json.getBoolean("2fa")
         );
+    }
+
+    public List<Server> getServers() {
+        return PteroAPI.getInstance().getServersController().getServersForUser(this.id);
     }
 
     public int getId() {

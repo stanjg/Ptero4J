@@ -23,16 +23,14 @@ public class UsersController extends Controller {
         try {
             Response response = makeApiCall("/users?page="+page, HTTPMethod.GET);
             if (response.code() != 200) {
+                PteroUtils.logRequestError(response);
                 return null;
             }
 
             List<User> users = new ArrayList<>();
 
             JSONObject json = new JSONObject(response.body().string());
-            JSONArray arr = json.getJSONArray("data");
-            for (int i = 0; i < arr.length(); i++) {
-                users.add(new User(arr.getJSONObject(i).getJSONObject("attributes")));
-            }
+            addPageOfUsersToList(json, users);
 
             return users;
         } catch (IOException e) {
@@ -60,13 +58,6 @@ public class UsersController extends Controller {
                     json = new JSONObject(makeApiCall("/users?page="+i, HTTPMethod.GET).body().string());
 
                     addPageOfUsersToList(json, users);
-
-//                JSONArray arr = json.getJSONArray("data");
-//                for (int j = 0; j < arr.length(); j ++) {
-//                    JSONObject juser = arr.getJSONObject(j);
-//
-//                    users.add(new User(juser.getJSONObject("attributes")));
-//                }
             }
 
             return users;
