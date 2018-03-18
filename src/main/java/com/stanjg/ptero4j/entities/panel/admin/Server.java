@@ -1,6 +1,10 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.ServerContainer;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
 import org.json.JSONObject;
@@ -13,6 +17,7 @@ public class Server {
     private boolean suspended;
     private ServerContainer container;
     private ServerLimits limits;
+    private FeatureLimits featureLimits;
 
     public Server(PteroAdminAPI api, JSONObject json) {
         this(
@@ -35,6 +40,9 @@ public class Server {
                 ),
                 new ServerLimits(
                         json.getJSONObject("limits")
+                ),
+                new FeatureLimits(
+                        json.getJSONObject("feature_limits")
                 )
         );
     }
@@ -46,7 +54,8 @@ public class Server {
                    int nestId, int externalId,
                    int packId, int nodeId,
                    int ownerId, boolean suspended,
-                   ServerContainer container, ServerLimits limits) {
+                   ServerContainer container, ServerLimits limits,
+                   FeatureLimits featureLimits) {
         this.api = api;
         this.longId = longId;
         this.name = name;
@@ -63,6 +72,19 @@ public class Server {
         this.suspended = suspended;
         this.container = container;
         this.limits = limits;
+        this.featureLimits = featureLimits;
+    }
+
+    public ServerUpdateDetailsAction editDetails() {
+        return new ServerUpdateDetailsAction(api, this);
+    }
+
+    public ServerUpdateBuildAction editBuild() {
+        return new ServerUpdateBuildAction(api, this);
+    }
+
+    public ServerUpdateStartupAction editStartup() {
+        return new ServerUpdateStartupAction(api, this);
     }
 
     public User getOwner() {
@@ -127,5 +149,9 @@ public class Server {
 
     public ServerLimits getLimits() {
         return limits;
+    }
+
+    public FeatureLimits getFeatureLimits() {
+        return featureLimits;
     }
 }

@@ -14,9 +14,9 @@ public class Main {
 
         api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
 
-        for (Server server : api.getUsersController().getUser(22).getServers()) {
-            PteroUtils.log(server.getName());
-        }
+        //Server server = api.getServersController().getServer(1591);
+
+        api.getServersController().editServerStartup(1).setSkipScripts(false).execute();
     }
 
 }

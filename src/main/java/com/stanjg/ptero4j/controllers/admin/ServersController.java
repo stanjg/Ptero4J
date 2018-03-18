@@ -1,6 +1,10 @@
 package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.PteroAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
 import com.stanjg.ptero4j.controllers.Controller;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
@@ -18,6 +22,44 @@ public class ServersController extends Controller {
     public ServersController(PteroAdminAPI api, String baseURL, String key) {
         super(api, baseURL, key);
     }
+
+    public ServerUpdateDetailsAction editServerDetails(int id) {
+        return new ServerUpdateDetailsAction(getAdminAPI(), id);
+    }
+
+    public ServerUpdateBuildAction editServerBuild(int id) {
+        return new ServerUpdateBuildAction(getAdminAPI(), id);
+    }
+
+    public ServerUpdateStartupAction editServerStartup(int id) {
+        return new ServerUpdateStartupAction(getAdminAPI(), id);
+    }
+
+    public Server executeUpdate(PteroAction action) {
+
+        JSONObject data = action.getAsJSON();
+
+        try {
+
+            Response response = makeApiCall(action.getEndpoint(), action.getMethod(), data);
+            if (response.code() != 200) {
+                System.out.println(response.body().string());
+                PteroUtils.logRequestError(response);
+                return null;
+            }
+
+            JSONObject json = new JSONObject(response.body().string()).getJSONObject("attributes");
+
+            return new Server(getAdminAPI(), json);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 
     public List<Server> getServers(int page) {
 
