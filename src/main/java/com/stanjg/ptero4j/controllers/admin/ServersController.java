@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.servers.ServerCreateAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
@@ -18,6 +19,10 @@ public class ServersController extends ResourceController<Server> {
 
     public ServersController(PteroAdminAPI api, String baseURL, String key) {
         super(api, baseURL, key, "servers");
+    }
+
+    public ServerCreateAction createNew() {
+        return new ServerCreateAction(getAdminAPI());
     }
 
     public ServerUpdateDetailsAction editServerDetails(int id) {

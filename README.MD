@@ -21,7 +21,7 @@ A java library to interact with the Admin API of [Pterodactyl Panel](https://git
             - [Servers Controller](#user-controller)
             - [Server Actions](#user-actions)
     - [User API](#user-api-docs)
-        - Still has to be made
+        - Documentation still has to be made
 
 ### <a name="concepts"></a>General Concepts
 #### <a name="controllers"></a>Controllers

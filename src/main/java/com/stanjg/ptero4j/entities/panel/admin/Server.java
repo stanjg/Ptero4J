@@ -1,10 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.actions.admin.servers.GenericAdminAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
-import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.actions.admin.servers.*;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.ServerContainer;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
@@ -75,6 +72,10 @@ public class Server {
         this.container = container;
         this.limits = limits;
         this.featureLimits = featureLimits;
+    }
+
+    public static ServerCreateAction create(PteroAdminAPI api) {
+        return new ServerCreateAction(api);
     }
 
     public ServerUpdateDetailsAction editDetails() {
