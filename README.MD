@@ -172,9 +172,10 @@ List<Server> servers = controller.getServersForUser(88);
 ##### <a name="server-actions"></a>Server Actions
 ```java
 // Explicit Actions
-server.editDetails()    -> ServerUpdateDetailsAction
-server.editBuild()      -> ServerUpdateBuildAction
-server.editStartup()    -> ServerUpdateStartupAction
+server.editDetails()            -> ServerUpdateDetailsAction
+server.editBuild()              -> ServerUpdateBuildAction
+server.editStartup()            -> ServerUpdateStartupAction
+serversController.createNew()   -> ServerCreateAction
 
 // Generic Actions
 server.suspend()
@@ -234,3 +235,4 @@ user.delete()
 ```
 
 ### <a name="user-api-docs"></a>User API
+Documention still has to be made. Feel free to create it and open a PR :)
