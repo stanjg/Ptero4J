@@ -8,16 +8,20 @@ A java library to interact with the Admin API of [Pterodactyl Panel](https://git
 - [General Concepts](#concepts)
     - [Controllers](#controllers)
     - [Actions](#actions)
+    - [Admin and User API](#apis)
 - [Usage Examples](#examples)
 - [Documentation](#documentation)
-    - [Servers](#servers)
-        - [Server Object](#server-object)
-        - [Servers Controller](#server-controller)
-        - [Server Actions](#server-actions)
-    - [Users](#users)
-        - [Server Object](#user-object)
-        - [Servers Controller](#user-controller)
-        - [Server Actions](#user-actions)
+    - [Admin API](#admin-api-docs)
+        - [Servers](#servers)
+            - [Server Object](#server-object)
+            - [Servers Controller](#server-controller)
+            - [Server Actions](#server-actions)
+        - [Users](#users)
+            - [Server Object](#user-object)
+            - [Servers Controller](#user-controller)
+            - [Server Actions](#user-actions)
+    - [User API](#user-api-docs)
+        - Still has to be made
 
 ### <a name="concepts"></a>General Concepts
 #### <a name="controllers"></a>Controllers
@@ -43,6 +47,11 @@ server.editBuild().setMemory(2048).execute();
 // Generic Action
 server.suspend();
 ```
+
+#### <a name="apis"></a>Admin and User API
+The library is split into two seperate APIs, the PteroUserAPI and the PteroAdminAPI. This is done because the Pterodactyl Panel API is actually split up into these two sections aswell.
+- The Admin API is used to get/modify/create objects in the Panel.
+- The User API is used to send commands and power options to servers.
 
 ### <a name="examples"></a>Usage Examples
 Let's imagine that a server is overdue, you have it's ID and you want to suspend the server
@@ -97,6 +106,7 @@ public static void main(String[] args) {
 ```
 
 ### <a name="documentation"></a>Documentation
+### <a name="admin-api-docs"></a>Admin API
 #### <a name="servers"></a>Servers
 ##### <a name="server-object"></a>Server Object
 ```java
@@ -222,3 +232,5 @@ usersController.createNew() -> UserCreateAction
 // Generic Actions
 user.delete()
 ```
+
+### <a name="user-api-docs"></a>User API
