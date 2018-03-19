@@ -1,6 +1,7 @@
-package com.stanjg.ptero4j.controllers.admin;
+package com.stanjg.ptero4j.controllers;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.actions.PteroAction;
 import com.stanjg.ptero4j.actions.PteroVoidAction;
 import com.stanjg.ptero4j.controllers.Controller;
@@ -14,6 +15,10 @@ import java.io.IOException;
 public class GenericController extends Controller {
 
     public GenericController(PteroAdminAPI api, String baseURL, String key) {
+        super(api, baseURL, key);
+    }
+
+    public GenericController(PteroUserAPI api, String baseURL, String key) {
         super(api, baseURL, key);
     }
 

@@ -1,17 +1,18 @@
-package com.stanjg.ptero4j.actions;
+package com.stanjg.ptero4j.actions.admin.servers;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.PteroVoidAction;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import org.json.JSONObject;
 
-public class GenericAction implements PteroVoidAction {
+public class GenericAdminAction implements PteroVoidAction {
 
     private PteroAdminAPI api;
     private String endpoint;
     private HTTPMethod method;
     private JSONObject json;
 
-    public GenericAction(PteroAdminAPI api, String endpoint, HTTPMethod method) {
+    public GenericAdminAction(PteroAdminAPI api, String endpoint, HTTPMethod method) {
         this(
                 api,
                 endpoint,
@@ -20,7 +21,7 @@ public class GenericAction implements PteroVoidAction {
         );
     }
 
-    public GenericAction(PteroAdminAPI api, String endpoint, HTTPMethod method, JSONObject json) {
+    public GenericAdminAction(PteroAdminAPI api, String endpoint, HTTPMethod method, JSONObject json) {
         this.api = api;
         this.endpoint = endpoint;
         this.method = method;

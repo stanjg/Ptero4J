@@ -1,5 +1,6 @@
 package com.stanjg.ptero4j;
 
+import com.stanjg.ptero4j.controllers.GenericController;
 import com.stanjg.ptero4j.controllers.admin.*;
 import com.stanjg.ptero4j.controllers.TestController;
 

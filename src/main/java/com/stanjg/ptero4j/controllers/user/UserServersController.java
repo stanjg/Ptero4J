@@ -19,6 +19,27 @@ public class UserServersController extends Controller {
         super(api, baseURL, key);
     }
 
+    public UserServer getServer(String id) {
+
+        try {
+
+            Response response = makeApiCall("/servers/"+id, HTTPMethod.GET);
+            if (response.code() != 200) {
+                PteroUtils.logRequestError(response);
+                return null;
+            }
+
+            JSONObject json = new JSONObject(response.body().string());
+
+            return new UserServer(getUserAPI(), json.getJSONObject("attributes"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public List<UserServer> getServers() {
 
         try {

@@ -1,7 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.actions.GenericAction;
+import com.stanjg.ptero4j.actions.admin.servers.GenericAdminAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
@@ -90,19 +90,19 @@ public class Server {
     }
 
     public boolean suspend() {
-        return new GenericAction(api, "/servers/"+this.shortId+"/suspend", HTTPMethod.POST).execute() == 204;
+        return new GenericAdminAction(api, "/servers/"+this.shortId+"/suspend", HTTPMethod.POST).execute() == 204;
     }
 
     public boolean unsuspend() {
-        return new GenericAction(api, "/servers/"+this.shortId+"/unsuspend", HTTPMethod.POST).execute() == 204;
+        return new GenericAdminAction(api, "/servers/"+this.shortId+"/unsuspend", HTTPMethod.POST).execute() == 204;
     }
 
     public boolean reinstall() {
-        return new GenericAction(api, "/servers/"+this.shortId+"/reinstall", HTTPMethod.POST).execute() == 204;
+        return new GenericAdminAction(api, "/servers/"+this.shortId+"/reinstall", HTTPMethod.POST).execute() == 204;
     }
 
     public boolean rebuild() {
-        return new GenericAction(api, "/servers/"+this.shortId+"/rebuild", HTTPMethod.POST).execute() == 204;
+        return new GenericAdminAction(api, "/servers/"+this.shortId+"/rebuild", HTTPMethod.POST).execute() == 204;
     }
 
     public boolean delete() {

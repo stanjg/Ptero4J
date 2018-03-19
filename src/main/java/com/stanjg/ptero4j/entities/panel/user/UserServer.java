@@ -1,8 +1,11 @@
 package com.stanjg.ptero4j.entities.panel.user;
 
 import com.stanjg.ptero4j.PteroUserAPI;
+import com.stanjg.ptero4j.actions.admin.users.GenericUserAction;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
+import com.stanjg.ptero4j.entities.objects.server.PowerAction;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
+import com.stanjg.ptero4j.util.HTTPMethod;
 import org.json.JSONObject;
 
 public class UserServer {
@@ -39,6 +42,30 @@ public class UserServer {
         this.owner = owner;
         this.limits = limits;
         this.featureLimits = featureLimits;
+    }
+
+    public boolean sendCommand(String command) {
+        return new GenericUserAction(api, "/servers/"+this.id+"/command", HTTPMethod.POST, new JSONObject().put("command", command)).execute() == 204;
+    }
+
+    public boolean start() {
+        return sendPowerAction(PowerAction.START);
+    }
+
+    public boolean stop() {
+        return sendPowerAction(PowerAction.STOP);
+    }
+
+    public boolean restart() {
+        return sendPowerAction(PowerAction.RESTART);
+    }
+
+    public boolean kill() {
+        return sendPowerAction(PowerAction.KILL);
+    }
+
+    public boolean sendPowerAction(PowerAction action) {
+        return new GenericUserAction(api, "/servers/"+this.id+"/power", HTTPMethod.POST, new JSONObject().put("signal", action.getValue())).execute() == 204;
     }
 
     public String getId() {
