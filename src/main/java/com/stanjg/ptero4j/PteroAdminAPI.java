@@ -1,9 +1,7 @@
 package com.stanjg.ptero4j;
 
-import com.stanjg.ptero4j.controllers.admin.GenericController;
-import com.stanjg.ptero4j.controllers.admin.ServersController;
+import com.stanjg.ptero4j.controllers.admin.*;
 import com.stanjg.ptero4j.controllers.TestController;
-import com.stanjg.ptero4j.controllers.admin.UsersController;
 
 import java.io.IOException;
 
@@ -27,19 +25,19 @@ public class PteroAdminAPI {
         }
 
         this.usersController = new UsersController(this, this.baseURL, this.key);
-        this.serversController = new ServersController(this, this.baseURL, this.key);
         this.genericController = new GenericController(this, this.baseURL, this.key);
+        this.serversController = new ServersController(this, this.baseURL, this.key);
     }
 
     public UsersController getUsersController() {
         return this.usersController;
     }
 
-    public ServersController getServersController() {
-        return serversController;
-    }
-
     public GenericController getGenericController() {
         return genericController;
+    }
+
+    public ServersController getServersController() {
+        return serversController;
     }
 }

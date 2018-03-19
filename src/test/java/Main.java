@@ -1,9 +1,4 @@
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.PteroUserAPI;
-import com.stanjg.ptero4j.actions.GenericAction;
-import com.stanjg.ptero4j.entities.panel.admin.Server;
-import com.stanjg.ptero4j.entities.panel.user.UserServer;
-import com.stanjg.ptero4j.util.PteroUtils;
 import util.Config;
 
 public class Main {
@@ -15,9 +10,7 @@ public class Main {
 
         api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
 
-        Server server = api.getServersController().getServer(1591);
-
-        System.out.println(server.delete());
+        System.out.println(api.getServersController().getServersForUser(22).get(1).getName());
     }
 
 }
