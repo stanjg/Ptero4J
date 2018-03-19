@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.users.UserCreateAction;
 import com.stanjg.ptero4j.actions.admin.users.UserUpdateAction;
 import org.json.JSONObject;
 
@@ -41,6 +42,10 @@ public class User {
                 json.getBoolean("root_admin"),
                 json.getBoolean("2fa")
         );
+    }
+
+    public static UserCreateAction create(PteroAdminAPI api) {
+        return new UserCreateAction(api);
     }
 
     public UserUpdateAction edit() {

@@ -1,4 +1,5 @@
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.users.UserCreateAction;
 import util.Config;
 
 public class Main {
@@ -9,8 +10,6 @@ public class Main {
         new Config();
 
         api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
-
-        System.out.println(api.getUsersController().getUser(90238408).delete());
     }
 
 }

@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.users.UserCreateAction;
 import com.stanjg.ptero4j.actions.admin.users.UserUpdateAction;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.entities.panel.admin.User;
@@ -12,6 +13,10 @@ public class UsersController extends ResourceController<User> {
 
     public UsersController(PteroAdminAPI api, String baseURL, String key) {
         super(api, baseURL, key, "users");
+    }
+
+    public UserCreateAction createNew() {
+        return new UserCreateAction(getAdminAPI());
     }
 
     public UserUpdateAction editUser(int id) {
