@@ -2,10 +2,9 @@ package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.GenericAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateBuildAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateDetailsAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateStartupAction;
-import com.stanjg.ptero4j.controllers.admin.GenericController;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.ServerContainer;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;

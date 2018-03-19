@@ -1,10 +1,9 @@
 package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.actions.PteroAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateBuildAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateDetailsAction;
-import com.stanjg.ptero4j.actions.admin.servers.settings.ServerUpdateStartupAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
+import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
