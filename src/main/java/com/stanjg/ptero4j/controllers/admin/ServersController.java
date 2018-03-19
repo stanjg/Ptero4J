@@ -49,6 +49,10 @@ public class ServersController extends ResourceController<Server> {
         return super.getResourcesPage(page);
     }
 
+    public boolean deleteServer(int id) {
+        return super.delete(id);
+    }
+
     public List<Server> getServersForUser(int user) {
 
         try {

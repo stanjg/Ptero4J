@@ -10,7 +10,7 @@ public class Main {
 
         api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
 
-        System.out.println(api.getServersController().getServersForUser(22).get(1).getName());
+        System.out.println(api.getUsersController().getUser(90238408).delete());
     }
 
 }

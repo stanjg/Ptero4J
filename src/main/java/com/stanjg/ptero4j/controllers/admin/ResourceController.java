@@ -214,6 +214,26 @@ public abstract class ResourceController<T> extends Controller {
 
     }
 
+    protected boolean delete(int id) {
+
+        try {
+            Response response = makeApiCall("/"+resourceName+"/"+id, HTTPMethod.DELETE);
+            boolean success = response.code() == 204;
+
+            if (!success) {
+                PteroUtils.logRequestError(response);
+                return success;
+            }
+
+            return success;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     protected void addPageToList(JSONObject page, List<T> list) {
         JSONArray arr = page.getJSONArray("data");
         for (int j = 0; j < arr.length(); j ++) {

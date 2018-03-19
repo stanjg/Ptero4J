@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.users.UserUpdateAction;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -42,8 +43,16 @@ public class User {
         );
     }
 
+    public UserUpdateAction edit() {
+        return new UserUpdateAction(api, this);
+    }
+
     public List<Server> getServers() {
         return api.getServersController().getServersForUser(this.id);
+    }
+
+    public boolean delete() {
+        return api.getUsersController().deleteUser(this.id);
     }
 
     public int getId() {

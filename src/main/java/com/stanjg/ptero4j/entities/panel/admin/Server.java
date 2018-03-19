@@ -107,7 +107,7 @@ public class Server {
     }
 
     public boolean delete() {
-        return new GenericAction(api, "/servers/"+this.shortId, HTTPMethod.DELETE).execute() == 204;
+        return api.getServersController().deleteServer(this.shortId);
     }
 
     public User getOwner() {
