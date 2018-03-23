@@ -5,15 +5,14 @@ import util.Config;
 
 public class Main {
 
-    private static PteroUserAPI api;
+    private static PteroAdminAPI api;
 
     public static void main(String[] args) {
         new Config();
 
-        api = new PteroUserAPI(Config.getBaseURL(), Config.getKey());
+        api = new PteroAdminAPI(Config.getBaseURL(), Config.getKey());
 
-        System.out.println("Sending 'help' to server");
-        System.out.println(api.getServersController().getServer("8045c0d0").sendCommand("help"));
+        System.out.println(api.getNodesController().getAllNodes().size());
     }
 
 }

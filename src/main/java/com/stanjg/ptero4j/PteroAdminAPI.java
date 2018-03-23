@@ -13,6 +13,7 @@ public class PteroAdminAPI {
     private UsersController usersController;
     private ServersController serversController;
     private GenericController genericController;
+    private NodesController nodesController;
 
     public PteroAdminAPI(String baseURL, String key) {
 
@@ -28,6 +29,7 @@ public class PteroAdminAPI {
         this.usersController = new UsersController(this, this.baseURL, this.key);
         this.genericController = new GenericController(this, this.baseURL, this.key);
         this.serversController = new ServersController(this, this.baseURL, this.key);
+        this.nodesController = new NodesController(this, this.baseURL, this.key);
     }
 
     public UsersController getUsersController() {
@@ -40,5 +42,9 @@ public class PteroAdminAPI {
 
     public ServersController getServersController() {
         return serversController;
+    }
+
+    public NodesController getNodesController() {
+        return nodesController;
     }
 }
