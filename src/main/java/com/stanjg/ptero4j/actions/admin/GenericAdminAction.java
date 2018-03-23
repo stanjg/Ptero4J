@@ -1,4 +1,4 @@
-package com.stanjg.ptero4j.actions.admin.servers;
+package com.stanjg.ptero4j.actions.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.PteroVoidAction;
