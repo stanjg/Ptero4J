@@ -13,6 +13,11 @@ public class PteroUserAPI {
     private UserServersController serversController;
     private GenericController genericController;
 
+    /**
+     * Create a instance of UserAPI
+     * @param baseURL URL of panel (like https://panel.myhost.com)
+     * @param key The API Key from the panel
+     */
     public PteroUserAPI(String baseURL, String key) {
 
         this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/client" : baseURL + "/api/client";
