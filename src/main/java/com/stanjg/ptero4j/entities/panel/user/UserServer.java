@@ -1,7 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.user;
 
 import com.stanjg.ptero4j.PteroUserAPI;
-import com.stanjg.ptero4j.actions.admin.users.GenericUserAction;
+import com.stanjg.ptero4j.actions.users.GenericUserAction;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.PowerAction;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;

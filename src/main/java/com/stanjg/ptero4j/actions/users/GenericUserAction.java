@@ -1,6 +1,5 @@
-package com.stanjg.ptero4j.actions.admin.users;
+package com.stanjg.ptero4j.actions.users;
 
-import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.actions.PteroVoidAction;
 import com.stanjg.ptero4j.util.HTTPMethod;
