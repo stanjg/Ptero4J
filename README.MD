@@ -9,6 +9,7 @@ A java library to interact with the Admin API of [Pterodactyl Panel](https://git
     - [Controllers](#controllers)
     - [Actions](#actions)
     - [Admin and User API](#apis)
+- [Maven Repository](#maven)
 - [Usage Examples](#examples)
 - [Documentation](#documentation)
     - [Admin API](#admin-api-docs)
@@ -52,6 +53,29 @@ server.suspend();
 The library is split into two seperate APIs, the PteroUserAPI and the PteroAdminAPI. This is done because the Pterodactyl Panel API is actually split up into these two sections aswell.
 - The Admin API is used to get/modify/create objects in the Panel.
 - The User API is used to send commands and power options to servers.
+
+### <a name="maven"></a>Maven Repository
+In your pom.xml you need add the Jitpack repository and the panel dependency
+```xml
+    <repositories>
+        <!-- Jitpack repo -->
+        <repository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <!-- Panel API -->
+        <dependency>
+            <groupId>com.github.stanjg</groupId>
+            <artifactId>Ptero4J</artifactId>
+            <version>-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+```
+
+Or you can clone the project and run a "mvn clean install" to get a compiled jar file.
 
 ### <a name="examples"></a>Usage Examples
 Let's imagine that a server is overdue, you have it's ID and you want to suspend the server
