@@ -31,7 +31,7 @@ public class PteroUtils {
             case 500:
                 return "An error occurred on the panel's side, please check panel logs.\n" + response.request().method() + " " + response.request().url();
             default:
-                return "An error occurred while making a request to the panel, if the issue persists please create an issue on github.\n" + response.request().method() + " " + response.request().url();
+                return "An error occurred while making a request to the panel, if the issue persists please create an issue on github.\n" + response.code() + " " + response.request().method() + " " + response.request().url();
         }
 
     }
