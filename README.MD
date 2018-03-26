@@ -70,7 +70,7 @@ In your pom.xml you need add the Jitpack repository and the panel dependency
         <dependency>
             <groupId>com.github.stanjg</groupId>
             <artifactId>Ptero4J</artifactId>
-            <version>-SNAPSHOT</version>
+            <version>master-SNAPSHOT</version>
         </dependency>
     </dependencies>
 ```
