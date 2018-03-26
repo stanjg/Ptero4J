@@ -33,10 +33,18 @@ public class PteroUserAPI {
         this.genericController = new GenericController(this, this.baseURL, this.key);
     }
 
+    /**
+     * Get the ServersController used to fetch servers and execute server actions
+     * @return ServersController
+     */
     public UserServersController getServersController() {
         return this.serversController;
     }
 
+    /**
+     * Get the GenericController used to execute generic actions
+     * @return GenericController
+     */
     public GenericController getGenericController() {
         return genericController;
     }

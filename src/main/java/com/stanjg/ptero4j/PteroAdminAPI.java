@@ -15,6 +15,11 @@ public class PteroAdminAPI {
     private GenericController genericController;
     private NodesController nodesController;
 
+    /**
+     * Create an instance of AdminAPI
+     * @param baseURL URL of the panel (like https://panel.myhost.com)
+     * @param key The application API Key from the panel
+     */
     public PteroAdminAPI(String baseURL, String key) {
 
         this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/application" : baseURL + "/api/application";
@@ -32,18 +37,34 @@ public class PteroAdminAPI {
         this.nodesController = new NodesController(this, this.baseURL, this.key);
     }
 
+    /**
+     * Get the UsersController used to fetch users and execute user actions
+     * @return UsersController
+     */
     public UsersController getUsersController() {
         return this.usersController;
     }
 
+    /**
+     * Get the GenericController used to execute generic actions
+     * @return GenericController
+     */
     public GenericController getGenericController() {
         return genericController;
     }
 
+    /**
+     * Get the ServersController used to fetch servers and execute server actions
+     * @return ServersController
+     */
     public ServersController getServersController() {
         return serversController;
     }
 
+    /**
+     * Get the NodesController used to fetch nodes and execute node actions
+     * @return NodesController
+     */
     public NodesController getNodesController() {
         return nodesController;
     }
