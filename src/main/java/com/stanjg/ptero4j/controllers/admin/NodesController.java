@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.controllers.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.nodes.NodeUpdateAction;
 import com.stanjg.ptero4j.entities.panel.admin.Node;
 import org.json.JSONObject;
 
@@ -10,6 +11,10 @@ public class NodesController extends ResourceController<Node> {
 
     public NodesController(PteroAdminAPI api, String baseURL, String key) {
         super(api, baseURL, key, "nodes");
+    }
+
+    public NodeUpdateAction editNode(int id) {
+        return new NodeUpdateAction(getAdminAPI(), id);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
+import com.stanjg.ptero4j.actions.admin.nodes.NodeUpdateAction;
 import org.json.JSONObject;
 
 public class Node {
@@ -27,7 +28,8 @@ public class Node {
                 json.getString("fqdn"),
                 json.getString("scheme"),
                 json.getString("daemon_base"),
-                json.getInt("public") == 1,
+                // Need to do the check this way as older versions of pterodactyl had a fault where the public field was sent as an integer
+                json.get("public") instanceof Integer ? json.getInt("public") == 1 : json.getBoolean("public"),
                 json.getBoolean("behind_proxy")
         );
     }
@@ -58,6 +60,10 @@ public class Node {
         this.daemonBase = daemonBase;
         this.isPublic = isPublic;
         this.behindProxy = behindProxy;
+    }
+
+    public NodeUpdateAction edit() {
+        return new NodeUpdateAction(getApi(), this);
     }
 
     public PteroAdminAPI getApi() {

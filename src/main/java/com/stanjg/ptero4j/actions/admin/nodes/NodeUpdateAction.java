@@ -19,7 +19,7 @@ public class NodeUpdateAction implements PteroAction<Node> {
         );
     }
 
-    private NodeUpdateAction(PteroAdminAPI api, Node node) {
+    public NodeUpdateAction(PteroAdminAPI api, Node node) {
         this.api = api;
         this.node = node;
 
