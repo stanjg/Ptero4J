@@ -18,11 +18,14 @@ A java library to interact with the Admin API of [Pterodactyl Panel](https://git
             - [Servers Controller](#server-controller)
             - [Server Actions](#server-actions)
         - [Users](#users)
-            - [Server Object](#user-object)
-            - [Servers Controller](#user-controller)
-            - [Server Actions](#user-actions)
+            - [User Object](#user-object)
+            - [User Controller](#user-controller)
+            - [User Actions](#user-actions)
     - [User API](#user-api-docs)
-        - Documentation still has to be made
+        - [Servers](#user-servers)
+            - [UserServer Object](#user-server-object)
+            - [UserServers Controller](#user-server-controller)
+            - [UserServer Actions](#user-server-actions)
 
 ### <a name="concepts"></a>General Concepts
 #### <a name="controllers"></a>Controllers
@@ -259,4 +262,51 @@ user.delete()
 ```
 
 ### <a name="user-api-docs"></a>User API
-Documention still has to be made. Feel free to create it and open a PR :)
+#### <a name="user-servers"></a>User Servers
+##### <a name="user-server-object"></a>UserServer Object
+```java
+// Fields
+server.getId()
+server.getUuid()
+server.getName()
+server.getDescription()
+server.isOwner()
+server.getLimits()
+server.getFeatureLimits()
+
+// Field sub classes
+server.getLimits()
+    limits.getDisk()
+    limits.getMemory()
+    limits.getSwap()
+    limits.getIo()
+    limits.getCpu()
+    
+server.getFeatureLimits()
+    featureLimits.getMaxDatabases()
+    featureLimits.getMaxAllocations()
+```
+
+##### <a name="#user-server-controller"></a>UserServers Controller
+```java
+UserServersController controller = api.getServersController();
+
+// Fetch all servers you have access to
+List<Server> servers = controller.getServers();
+
+// Fetch server by ID
+UserServer server = controller.getServer("aaaa88");
+```
+
+##### <a name="#user-server-actions"></a>UserServers Actions
+```java
+// Generic Actions
+server.sendCommand("kick stanjg")
+server.start()
+server.stop()
+server.restart()
+server.kill()
+server.sendPowerAction(PowerAction.START)
+```
+
+That's it :)
