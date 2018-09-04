@@ -24,7 +24,7 @@ public class UserServersController extends Controller {
         try {
 
             Response response = makeApiCall("/servers/"+id, HTTPMethod.GET);
-            if (response.code() != 200) {
+            if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
             }
@@ -45,7 +45,7 @@ public class UserServersController extends Controller {
         try {
 
             Response response = makeApiCall("", HTTPMethod.GET);
-            if (response.code() != 200) {
+            if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
             }

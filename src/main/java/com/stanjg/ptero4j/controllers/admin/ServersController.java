@@ -61,7 +61,7 @@ public class ServersController extends ResourceController<Server> {
 
         try {
             Response response = makeApiCall("/users/"+user+"?include=servers", HTTPMethod.GET);
-            if (response.code() != 200) {
+            if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
             }
@@ -76,6 +76,30 @@ public class ServersController extends ResourceController<Server> {
 
             return resources;
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<Server> getServersForLocation(int id) {
+        try {
+            Response response = makeApiCall("/locations/"+id+"?include=servers", HTTPMethod.GET);
+            if (response.code() < 200 || response.code() >= 300) {
+                PteroUtils.logRequestError(response);
+                return null;
+            }
+
+            List<Server> resources = new ArrayList<>();
+
+            JSONObject json = new JSONObject(response.body().string())
+                    .getJSONObject("attributes")
+                    .getJSONObject("relationships")
+                    .getJSONObject("servers");
+            super.addPageToList(json, resources);
+
+            return resources;
         } catch (IOException e) {
             e.printStackTrace();
         }

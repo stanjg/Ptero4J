@@ -115,6 +115,14 @@ public class Server {
         return api.getUsersController().getUser(this.ownerId);
     }
 
+    public Location getLocation() {
+        return this.getNode().getLocation();
+    }
+
+    public Node getNode() {
+        return api.getNodesController().getNode(this.nodeId);
+    }
+
     public String getLongId() {
         return longId;
     }

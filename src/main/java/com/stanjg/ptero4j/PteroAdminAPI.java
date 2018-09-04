@@ -14,6 +14,7 @@ public class PteroAdminAPI {
     private ServersController serversController;
     private GenericController genericController;
     private NodesController nodesController;
+    private LocationsController locationsController;
 
     /**
      * Create an instance of AdminAPI
@@ -35,6 +36,7 @@ public class PteroAdminAPI {
         this.genericController = new GenericController(this, this.baseURL, this.key);
         this.serversController = new ServersController(this, this.baseURL, this.key);
         this.nodesController = new NodesController(this, this.baseURL, this.key);
+        this.locationsController = new LocationsController(this, this.baseURL, this.key);
     }
 
     /**
@@ -67,5 +69,13 @@ public class PteroAdminAPI {
      */
     public NodesController getNodesController() {
         return nodesController;
+    }
+
+    /**
+     * Get the LocationsController used to fetch locations and execute location actions
+     * @return LocationsController
+     */
+    public LocationsController getLocationsController() {
+        return locationsController;
     }
 }

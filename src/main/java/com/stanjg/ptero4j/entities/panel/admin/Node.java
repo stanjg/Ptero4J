@@ -63,11 +63,11 @@ public class Node {
     }
 
     public NodeUpdateAction edit() {
-        return new NodeUpdateAction(getApi(), this);
+        return new NodeUpdateAction(api, this);
     }
 
-    public PteroAdminAPI getApi() {
-        return api;
+    public Location getLocation() {
+        return api.getLocationsController().getLocation(getLocationId());
     }
 
     public int getId() {

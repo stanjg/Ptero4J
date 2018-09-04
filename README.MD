@@ -172,6 +172,8 @@ server.getFeatureLimits()
 
 // Relationships
 server.getOwner()
+server.getLocation()
+server.getNode()
 ```
 
 ##### <a name="server-controller"></a>Server Controller
