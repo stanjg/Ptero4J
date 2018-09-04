@@ -234,6 +234,30 @@ public abstract class ResourceController<T> extends Controller {
         return false;
     }
 
+    protected List<T> getResourcesFor(String otherResource, int id) {
+        try {
+            Response response = makeApiCall("/"+otherResource+"/"+id+"?include="+this.resourceName, HTTPMethod.GET);
+            if (response.code() < 200 || response.code() >= 300) {
+                PteroUtils.logRequestError(response);
+                return null;
+            }
+
+            List<T> resources = new ArrayList<>();
+
+            JSONObject json = new JSONObject(response.body().string())
+                    .getJSONObject("attributes")
+                    .getJSONObject("relationships")
+                    .getJSONObject(this.resourceName);
+            this.addPageToList(json, resources);
+
+            return resources;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     protected void addPageToList(JSONObject page, List<T> list) {
         JSONArray arr = page.getJSONArray("data");
         for (int j = 0; j < arr.length(); j ++) {
