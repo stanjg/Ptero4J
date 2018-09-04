@@ -53,3 +53,5 @@ fabric.properties
 config.properties
 
 target/
+
+src/test
