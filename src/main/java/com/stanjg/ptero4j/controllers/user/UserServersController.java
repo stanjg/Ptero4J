@@ -39,7 +39,14 @@ public class UserServersController extends Controller {
 
         return null;
     }
-
+    /**
+     * Required to get power states
+     */
+    @Override
+    public Response makeApiCall(String endpoint, HTTPMethod method) throws IOException {
+    	// TODO Auto-generated method stub
+    	return super.makeApiCall(endpoint, method);
+    }
     public List<UserServer> getServers() {
 
         try {
