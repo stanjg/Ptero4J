@@ -4,8 +4,14 @@ import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.actions.users.GenericUserAction;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.PowerAction;
+import com.stanjg.ptero4j.entities.objects.server.PowerState;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
 import com.stanjg.ptero4j.util.HTTPMethod;
+
+import okhttp3.Response;
+
+import java.io.IOException;
+
 import org.json.JSONObject;
 
 public class UserServer {
@@ -67,7 +73,36 @@ public class UserServer {
     public boolean sendPowerAction(PowerAction action) {
         return new GenericUserAction(api, "/servers/"+this.id+"/power", HTTPMethod.POST, new JSONObject().put("signal", action.getValue())).execute() == 204;
     }
-
+    
+    /**
+     * 
+     * @return Current power state of the Server, returns PowerState.ERROR if request errors
+     */
+    public PowerState getPowerState() {
+    	try {
+			Response response = api.getServersController().makeApiCall("/servers/"+this.id+"/utilization", HTTPMethod.GET);
+            JSONObject json = new JSONObject(response.body().string());
+            if(json.has("attributes")) json = json.getJSONObject("attributes");
+            else return PowerState.ERROR;
+            if(!json.has("state")) return PowerState.ERROR;
+            switch(json.getString("state")) {
+            case "on":
+            	return PowerState.ON;
+            case "off":
+            	return PowerState.OFF;
+            case "starting":
+            	return PowerState.STARTING;
+            case "stopping":
+            	return PowerState.STOPPING;
+            }
+    	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return PowerState.ERROR;
+    	
+		
+    }
     public String getId() {
         return id;
     }
@@ -95,4 +130,28 @@ public class UserServer {
     public FeatureLimits getFeatureLimits() {
         return featureLimits;
     }
+    /**
+     * 
+     * @return Server usages as int[] {CPU Usage, Memory Usage, Disk Usage}<br>
+     * values are -1 if getting them errored
+     */
+    public int[] getServerUsages() {
+    	int[] out = new int[] {-1,-1,-1};
+    	try {
+    	Response response = api.getServersController().makeApiCall("/servers/"+this.id+"/utilization", HTTPMethod.GET);
+        JSONObject json = new JSONObject(response.body().string());
+        if(json.has("attributes")) {
+        	json = json.getJSONObject("attributes");
+        	if(json.has("memory")) out[1] = json.getJSONObject("memory").getInt("current");
+        	if(json.has("disk")) out[2] = json.getJSONObject("disk").getInt("current");
+        	if(json.has("cpu")) out[0] = Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100);
+        }else {
+        	System.err.println(json);
+        }
+        return out;
+    	}catch (Exception e) {
+    		return out;
+		}
+    }
+    
 }
