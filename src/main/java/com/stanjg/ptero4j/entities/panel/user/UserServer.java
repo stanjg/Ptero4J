@@ -80,29 +80,7 @@ public class UserServer {
      * @return Current power state of the Server, returns PowerState.ERROR if request errors
      */
     public PowerState getPowerState() {
-    	try {
-			Response response = api.getServersController().makeApiCall("/servers/"+this.id+"/utilization", HTTPMethod.GET);
-            JSONObject json = new JSONObject(response.body().string());
-            if(json.has("attributes")) json = json.getJSONObject("attributes");
-            else return PowerState.ERROR;
-            if(!json.has("state")) return PowerState.ERROR;
-            switch(json.getString("state")) {
-            case "on":
-            	return PowerState.ON;
-            case "off":
-            	return PowerState.OFF;
-            case "starting":
-            	return PowerState.STARTING;
-            case "stopping":
-            	return PowerState.STOPPING;
-            }
-    	} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	return PowerState.ERROR;
-    	
-		
+    	return api.getServersController().getPowerState(this.id);
     }
     public String getId() {
         return id;
@@ -136,20 +114,7 @@ public class UserServer {
      * @return Server usage or null if request errors
      */
     public ServerUsage getServerUsage() {
-    	try {
-    	Response response = api.getServersController().makeApiCall("/servers/"+this.id+"/utilization", HTTPMethod.GET);
-        JSONObject json = new JSONObject(response.body().string());
-        if(json.has("attributes")) {
-        	json = json.getJSONObject("attributes");
-        	if(json.has("memory")&&json.has("disk")&&json.has("cpu")) return new ServerUsage( Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100), json.getJSONObject("memory").getInt("current"), json.getJSONObject("disk").getInt("current"));
-        	else return null;
-        }else {
-        	System.err.println(json);
-        	return null;
-        }
-    	}catch (Exception e) {
-    		return null;
-		}
+    	return api.getServersController().getServerUsage(this.id);
     }
     
 }
