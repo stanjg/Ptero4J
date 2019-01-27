@@ -6,6 +6,7 @@ import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.PowerAction;
 import com.stanjg.ptero4j.entities.objects.server.PowerState;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
+import com.stanjg.ptero4j.entities.objects.server.ServerUsage;
 import com.stanjg.ptero4j.util.HTTPMethod;
 
 import okhttp3.Response;
@@ -132,25 +133,22 @@ public class UserServer {
     }
     /**
      * 
-     * @return Server usages as int[] {CPU Usage, Memory Usage, Disk Usage}<br>
-     * values are -1 if the request errored
+     * @return Server usage or null if request errors
      */
-    public int[] getServerUsages() {
-    	int[] out = new int[] {-1,-1,-1};
+    public ServerUsage getServerUsage() {
     	try {
     	Response response = api.getServersController().makeApiCall("/servers/"+this.id+"/utilization", HTTPMethod.GET);
         JSONObject json = new JSONObject(response.body().string());
         if(json.has("attributes")) {
         	json = json.getJSONObject("attributes");
-        	if(json.has("memory")) out[1] = json.getJSONObject("memory").getInt("current");
-        	if(json.has("disk")) out[2] = json.getJSONObject("disk").getInt("current");
-        	if(json.has("cpu")) out[0] = Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100);
+        	if(json.has("memory")&&json.has("disk")&&json.has("cpu")) return new ServerUsage( Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100), json.getJSONObject("memory").getInt("current"), json.getJSONObject("disk").getInt("current"));
+        	else return null;
         }else {
         	System.err.println(json);
+        	return null;
         }
-        return out;
     	}catch (Exception e) {
-    		return out;
+    		return null;
 		}
     }
     
