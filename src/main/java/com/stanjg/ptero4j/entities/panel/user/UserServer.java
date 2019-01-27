@@ -133,7 +133,7 @@ public class UserServer {
     /**
      * 
      * @return Server usages as int[] {CPU Usage, Memory Usage, Disk Usage}<br>
-     * values are -1 if getting them errored
+     * values are -1 if the request errored
      */
     public int[] getServerUsages() {
     	int[] out = new int[] {-1,-1,-1};
