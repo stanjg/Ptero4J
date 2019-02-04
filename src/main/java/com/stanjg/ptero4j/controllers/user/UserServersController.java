@@ -111,7 +111,7 @@ public class UserServersController extends Controller {
 	        	json = json.getJSONObject("attributes");
 	        	if(json.has("memory")&&json.has("disk")&&json.has("cpu")) 
                                 if(json.getJSONObject("cpu").getFloat("limit") != 0)return new ServerUsage( Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100), json.getJSONObject("memory").getInt("current"), json.getJSONObject("disk").getInt("current"));
-	        	        else return 0;
+	        	        else return null;
                         else return null;
 	        }else {
 	        	System.err.println(json);
@@ -119,7 +119,7 @@ public class UserServersController extends Controller {
 	        }
 	    	}catch (Exception e) {
 	    		return null;
-			}
+		}
 	}
 
 }
