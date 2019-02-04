@@ -2,6 +2,8 @@ package com.stanjg.ptero4j.controllers.user;
 
 import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.controllers.Controller;
+import com.stanjg.ptero4j.entities.objects.server.PowerState;
+import com.stanjg.ptero4j.entities.objects.server.ServerUsage;
 import com.stanjg.ptero4j.entities.panel.user.UserServer;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
@@ -39,7 +41,6 @@ public class UserServersController extends Controller {
 
         return null;
     }
-
     public List<UserServer> getServers() {
 
         try {
@@ -77,5 +78,48 @@ public class UserServersController extends Controller {
             list.add(new UserServer(getUserAPI(), jserver.getJSONObject("attributes")));
         }
     }
+
+	public PowerState getPowerState(String serverID) {
+		try {
+			Response response = getUserAPI().getServersController().makeApiCall("/servers/"+serverID+"/utilization", HTTPMethod.GET);
+            JSONObject json = new JSONObject(response.body().string());
+            if(json.has("attributes")) json = json.getJSONObject("attributes");
+            else return PowerState.ERROR;
+            if(!json.has("state")) return PowerState.ERROR;
+            switch(json.getString("state")) {
+            case "on":
+            	return PowerState.ON;
+            case "off":
+            	return PowerState.OFF;
+            case "starting":
+            	return PowerState.STARTING;
+            case "stopping":
+            	return PowerState.STOPPING;
+            }
+    	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return PowerState.ERROR;
+	}
+
+	public ServerUsage getServerUsage(String id) {
+		try {
+	    	Response response = getUserAPI().getServersController().makeApiCall("/servers/"+id+"/utilization", HTTPMethod.GET);
+	        JSONObject json = new JSONObject(response.body().string());
+	        if(json.has("attributes")) {
+	        	json = json.getJSONObject("attributes");
+	        	if(json.has("memory")&&json.has("disk")&&json.has("cpu")) 
+                                if(json.getJSONObject("cpu").getFloat("limit") != 0)return new ServerUsage( Math.round((json.getJSONObject("cpu").getFloat("current")/json.getJSONObject("cpu").getFloat("limit"))*100), json.getJSONObject("memory").getInt("current"), json.getJSONObject("disk").getInt("current"));
+	        	        else return null;
+                        else return null;
+	        }else {
+	        	System.err.println(json);
+	        	return null;
+	        }
+	    	}catch (Exception e) {
+	    		return null;
+		}
+	}
 
 }

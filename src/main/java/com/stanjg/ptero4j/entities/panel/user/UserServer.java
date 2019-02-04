@@ -4,8 +4,15 @@ import com.stanjg.ptero4j.PteroUserAPI;
 import com.stanjg.ptero4j.actions.users.GenericUserAction;
 import com.stanjg.ptero4j.entities.objects.server.FeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.PowerAction;
+import com.stanjg.ptero4j.entities.objects.server.PowerState;
 import com.stanjg.ptero4j.entities.objects.server.ServerLimits;
+import com.stanjg.ptero4j.entities.objects.server.ServerUsage;
 import com.stanjg.ptero4j.util.HTTPMethod;
+
+import okhttp3.Response;
+
+import java.io.IOException;
+
 import org.json.JSONObject;
 
 public class UserServer {
@@ -67,7 +74,14 @@ public class UserServer {
     public boolean sendPowerAction(PowerAction action) {
         return new GenericUserAction(api, "/servers/"+this.id+"/power", HTTPMethod.POST, new JSONObject().put("signal", action.getValue())).execute() == 204;
     }
-
+    
+    /**
+     * 
+     * @return Current power state of the Server, returns PowerState.ERROR if request errors
+     */
+    public PowerState getPowerState() {
+    	return api.getServersController().getPowerState(this.id);
+    }
     public String getId() {
         return id;
     }
@@ -95,4 +109,12 @@ public class UserServer {
     public FeatureLimits getFeatureLimits() {
         return featureLimits;
     }
+    /**
+     * 
+     * @return Server usage or null if request errors
+     */
+    public ServerUsage getServerUsage() {
+    	return api.getServersController().getServerUsage(this.id);
+    }
+    
 }
