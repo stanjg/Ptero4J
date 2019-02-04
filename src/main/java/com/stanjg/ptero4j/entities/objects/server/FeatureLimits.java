@@ -8,8 +8,8 @@ public class FeatureLimits {
 
     public FeatureLimits(JSONObject json) {
         this(
-                (json.get("databases")==null)?0:json.getInt("databases"),
-                (json.get("allocations")==null)?0:json.getInt("allocations")
+                json.isNull("databases")?0:json.getInt("databases"),
+                json.isNull("allocations")?0:json.getInt("allocations")
         );
     }
 
