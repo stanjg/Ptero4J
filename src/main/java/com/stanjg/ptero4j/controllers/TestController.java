@@ -22,7 +22,7 @@ public class TestController extends Controller {
                 PteroUtils.log("Ptero4J loaded! Successfully made contact with the panel.");
                 return;
             case 401:
-                PteroUtils.log("Ptero4J failed to load! Unable to authenticated. Your key might be invalid.");
+                PteroUtils.log("Ptero4J failed to load! Unable to authenticate. Your key might be invalid.");
                 break;
             case 403:
                 PteroUtils.log("Mixed: not authorized to access /users, no permission.");
@@ -47,7 +47,7 @@ public class TestController extends Controller {
                 PteroUtils.log("Ptero4J loaded! Successfully made contact with the panel.");
                 return;
             case 401:
-                PteroUtils.log("Ptero4J failed to load! Unable to authenticated. Your key might be invalid.");
+                PteroUtils.log("Ptero4J failed to load! Unable to authenticate. Your key might be invalid.");
                 break;
             case 403:
                 PteroUtils.log("Not authorized.");
