@@ -62,7 +62,7 @@ public class UserUpdateAction implements PteroAction<User> {
 
     @Override
     public String getEndpoint() {
-        return "/users/"+user.getId();
+        return "/users/" + user.getId();
     }
 
     @Override

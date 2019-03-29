@@ -15,12 +15,13 @@ public class PteroUserAPI {
 
     /**
      * Create an instance of UserAPI
+     *
      * @param baseURL URL of the panel (like https://panel.myhost.com)
-     * @param key The client API Key from the panel
+     * @param key     The client API Key from the panel
      */
     public PteroUserAPI(String baseURL, String key) {
 
-        this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/client" : baseURL + "/api/client";
+        this.baseURL = baseURL.endsWith("/") ? baseURL + "api/client" : baseURL + "/api/client";
         this.key = "Bearer " + key;
 
         try {
@@ -35,6 +36,7 @@ public class PteroUserAPI {
 
     /**
      * Get the ServersController used to fetch servers and execute server actions
+     *
      * @return ServersController
      */
     public UserServersController getServersController() {
@@ -43,6 +45,7 @@ public class PteroUserAPI {
 
     /**
      * Get the GenericController used to execute generic actions
+     *
      * @return GenericController
      */
     public GenericController getGenericController() {

@@ -6,7 +6,8 @@ public class CreationServerLimits {
 
     private int disk, memory, swap, io, cpu;
 
-    public CreationServerLimits() { }
+    public CreationServerLimits() {
+    }
 
     public CreationServerLimits(int disk, int memory, int swap, int io, int cpu) {
         this.disk = disk;
@@ -29,36 +30,36 @@ public class CreationServerLimits {
         return disk;
     }
 
-    public int getMemory() {
-        return memory;
-    }
-
-    public int getSwap() {
-        return swap;
-    }
-
-    public int getIo() {
-        return io;
-    }
-
-    public int getCpu() {
-        return cpu;
-    }
-
     public void setDisk(int disk) {
         this.disk = disk;
+    }
+
+    public int getMemory() {
+        return memory;
     }
 
     public void setMemory(int memory) {
         this.memory = memory;
     }
 
+    public int getSwap() {
+        return swap;
+    }
+
     public void setSwap(int swap) {
         this.swap = swap;
     }
 
+    public int getIo() {
+        return io;
+    }
+
     public void setIo(int io) {
         this.io = io;
+    }
+
+    public int getCpu() {
+        return cpu;
     }
 
     public void setCpu(int cpu) {

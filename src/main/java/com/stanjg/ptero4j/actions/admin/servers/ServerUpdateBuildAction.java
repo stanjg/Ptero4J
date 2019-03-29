@@ -102,7 +102,7 @@ public class ServerUpdateBuildAction implements PteroAction<Server> {
 
     @Override
     public String getEndpoint() {
-        return "/servers/"+serverId+"/build";
+        return "/servers/" + serverId + "/build";
     }
 
     @Override

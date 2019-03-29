@@ -6,13 +6,8 @@ import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateBuildAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateDetailsAction;
 import com.stanjg.ptero4j.actions.admin.servers.ServerUpdateStartupAction;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
-import com.stanjg.ptero4j.util.HTTPMethod;
-import com.stanjg.ptero4j.util.PteroUtils;
-import okhttp3.Response;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServersController extends ResourceController<Server> {
