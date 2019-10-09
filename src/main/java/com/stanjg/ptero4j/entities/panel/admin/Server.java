@@ -15,8 +15,8 @@ import org.json.JSONObject;
 public class Server {
 
     private PteroAdminAPI api;
-    private String longId, name, description, uuid;
-    private int shortId, allocationId, eggId, nestId, externalId, packId, nodeId, ownerId;
+    private String longId, name, description, uuid, externalId;
+    private int shortId, allocationId, eggId, nestId,  packId, nodeId, ownerId;
     private boolean suspended;
     private ServerContainer container;
     private ServerLimits limits;
@@ -33,7 +33,7 @@ public class Server {
                 json.getInt("allocation"),
                 json.getInt("egg"),
                 json.getInt("nest"),
-                json.isNull("external_id") ? -1 : json.getInt("external_id"),
+                json.isNull("external_id") ? null : json.getString("external_id"),
                 json.isNull("pack") ? -1 : json.getInt("pack"),
                 json.getInt("node"),
                 json.getInt("user"),
@@ -54,7 +54,7 @@ public class Server {
                    String name, String description,
                    String uuid, int shortId,
                    int allocationId, int eggId,
-                   int nestId, int externalId,
+                   int nestId, String externalId,
                    int packId, int nodeId,
                    int ownerId, boolean suspended,
                    ServerContainer container, ServerLimits limits,
@@ -158,7 +158,7 @@ public class Server {
         return nestId;
     }
 
-    public int getExternalId() {
+    public String getExternalId() {
         return externalId;
     }
 

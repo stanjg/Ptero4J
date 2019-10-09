@@ -28,7 +28,7 @@ public class ServerUpdateDetailsAction implements PteroAction<Server> {
 
         json.put("name", server.getName());
         json.put("description", server.getDescription());
-        json.put("external_id", server.getExternalId() == -1 ? null : server.getExternalId());
+        json.put("external_id", server.getExternalId());
         json.put("user", server.getOwnerId());
     }
 
