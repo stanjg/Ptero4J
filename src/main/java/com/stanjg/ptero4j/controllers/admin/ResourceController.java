@@ -3,7 +3,6 @@ package com.stanjg.ptero4j.controllers.admin;
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.PteroAction;
 import com.stanjg.ptero4j.controllers.Controller;
-import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.Response;
@@ -79,7 +78,7 @@ public abstract class ResourceController<T> extends Controller {
     protected List<T> getResourcesWithParams(String queryParams) {
 
         try {
-            Response response = makeApiCall("/"+resourceName+"?"+queryParams, HTTPMethod.GET);
+            Response response = makeApiCall("/" + resourceName + "?" + queryParams, HTTPMethod.GET);
             System.out.println(response.request().url());
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
@@ -92,7 +91,7 @@ public abstract class ResourceController<T> extends Controller {
             int pages = json.getJSONObject("meta").getJSONObject("pagination").getInt("total_pages");
             for (int i = 1; i <= pages; i++) {
                 if (i != 1)
-                    json = new JSONObject(makeApiCall("/"+resourceName+"?page="+i+queryParams, HTTPMethod.GET).body().string());
+                    json = new JSONObject(makeApiCall("/" + resourceName + "?page=" + i + queryParams, HTTPMethod.GET).body().string());
 
                 addPageToList(json, resources);
             }
@@ -109,7 +108,7 @@ public abstract class ResourceController<T> extends Controller {
     protected T getResource(int id) {
 
         try {
-            Response response = makeApiCall("/"+resourceName+"/"+id, HTTPMethod.GET);
+            Response response = makeApiCall("/" + resourceName + "/" + id, HTTPMethod.GET);
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
@@ -129,7 +128,7 @@ public abstract class ResourceController<T> extends Controller {
     protected List<T> getResourcesWithQuery(String query) {
 
         try {
-            Response response = makeApiCall("/"+resourceName+"?search="+query, HTTPMethod.GET);
+            Response response = makeApiCall("/" + resourceName + "?search=" + query, HTTPMethod.GET);
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
@@ -141,7 +140,7 @@ public abstract class ResourceController<T> extends Controller {
             int pages = json.getJSONObject("meta").getJSONObject("pagination").getInt("total_pages");
             for (int i = 1; i <= pages; i++) {
                 if (i != 1)
-                    json = new JSONObject(makeApiCall("/"+resourceName+"?search="+query+"?page="+i, HTTPMethod.GET).body().string());
+                    json = new JSONObject(makeApiCall("/" + resourceName + "?search=" + query + "?page=" + i, HTTPMethod.GET).body().string());
 
                 addPageToList(json, resources);
             }
@@ -160,7 +159,7 @@ public abstract class ResourceController<T> extends Controller {
 
         try {
 
-            Response response = makeApiCall("/"+resourceName+"?page="+page, HTTPMethod.GET);
+            Response response = makeApiCall("/" + resourceName + "?page=" + page, HTTPMethod.GET);
 
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
@@ -186,7 +185,7 @@ public abstract class ResourceController<T> extends Controller {
 
         try {
 
-            Response response = makeApiCall("/"+resourceName, HTTPMethod.GET);
+            Response response = makeApiCall("/" + resourceName, HTTPMethod.GET);
 
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
@@ -199,7 +198,7 @@ public abstract class ResourceController<T> extends Controller {
             int pages = json.getJSONObject("meta").getJSONObject("pagination").getInt("total_pages");
             for (int i = 1; i <= pages; i++) {
                 if (i != 1)
-                    json = new JSONObject(makeApiCall("/"+resourceName+"?page="+i, HTTPMethod.GET).body().string());
+                    json = new JSONObject(makeApiCall("/" + resourceName + "?page=" + i, HTTPMethod.GET).body().string());
 
                 addPageToList(json, resources);
             }
@@ -217,7 +216,7 @@ public abstract class ResourceController<T> extends Controller {
     protected boolean delete(int id) {
 
         try {
-            Response response = makeApiCall("/"+resourceName+"/"+id, HTTPMethod.DELETE);
+            Response response = makeApiCall("/" + resourceName + "/" + id, HTTPMethod.DELETE);
             boolean success = response.code() == 204;
 
             if (!success) {
@@ -236,7 +235,7 @@ public abstract class ResourceController<T> extends Controller {
 
     protected List<T> getResourcesFor(String otherResource, int id) {
         try {
-            Response response = makeApiCall("/"+otherResource+"/"+id+"?include="+this.resourceName, HTTPMethod.GET);
+            Response response = makeApiCall("/" + otherResource + "/" + id + "?include=" + this.resourceName, HTTPMethod.GET);
             if (response.code() < 200 || response.code() >= 300) {
                 PteroUtils.logRequestError(response);
                 return null;
@@ -260,7 +259,7 @@ public abstract class ResourceController<T> extends Controller {
 
     protected void addPageToList(JSONObject page, List<T> list) {
         JSONArray arr = page.getJSONArray("data");
-        for (int j = 0; j < arr.length(); j ++) {
+        for (int j = 0; j < arr.length(); j++) {
             JSONObject json = arr.getJSONObject(j).getJSONObject("attributes");
 
             list.add(getNewInstance(json));

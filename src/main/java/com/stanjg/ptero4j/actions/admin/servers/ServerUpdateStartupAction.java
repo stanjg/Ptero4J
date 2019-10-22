@@ -81,7 +81,7 @@ public class ServerUpdateStartupAction implements PteroAction<Server> {
 
     @Override
     public String getEndpoint() {
-        return "/servers/"+serverId+"/startup";
+        return "/servers/" + serverId + "/startup";
     }
 
     @Override

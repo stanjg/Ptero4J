@@ -1,7 +1,6 @@
 package com.stanjg.ptero4j.entities.panel.admin;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
-import com.stanjg.ptero4j.actions.admin.locations.LocationCreateAction;
 import com.stanjg.ptero4j.actions.admin.locations.LocationUpdateAction;
 import org.json.JSONObject;
 

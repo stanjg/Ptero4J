@@ -1,8 +1,11 @@
 package com.stanjg.ptero4j;
 
 import com.stanjg.ptero4j.controllers.GenericController;
-import com.stanjg.ptero4j.controllers.admin.*;
 import com.stanjg.ptero4j.controllers.TestController;
+import com.stanjg.ptero4j.controllers.admin.LocationsController;
+import com.stanjg.ptero4j.controllers.admin.NodesController;
+import com.stanjg.ptero4j.controllers.admin.ServersController;
+import com.stanjg.ptero4j.controllers.admin.UsersController;
 
 import java.io.IOException;
 
@@ -18,12 +21,13 @@ public class PteroAdminAPI {
 
     /**
      * Create an instance of AdminAPI
+     *
      * @param baseURL URL of the panel (like https://panel.myhost.com)
-     * @param key The application API Key from the panel
+     * @param key     The application API Key from the panel
      */
     public PteroAdminAPI(String baseURL, String key) {
 
-        this.baseURL = baseURL.endsWith("/") ? baseURL  + "api/application" : baseURL + "/api/application";
+        this.baseURL = baseURL.endsWith("/") ? baseURL + "api/application" : baseURL + "/api/application";
         this.key = "Bearer " + key;
 
         try {
@@ -41,6 +45,7 @@ public class PteroAdminAPI {
 
     /**
      * Get the UsersController used to fetch users and execute user actions
+     *
      * @return UsersController
      */
     public UsersController getUsersController() {
@@ -49,6 +54,7 @@ public class PteroAdminAPI {
 
     /**
      * Get the GenericController used to execute generic actions
+     *
      * @return GenericController
      */
     public GenericController getGenericController() {
@@ -57,6 +63,7 @@ public class PteroAdminAPI {
 
     /**
      * Get the ServersController used to fetch servers and execute server actions
+     *
      * @return ServersController
      */
     public ServersController getServersController() {
@@ -65,6 +72,7 @@ public class PteroAdminAPI {
 
     /**
      * Get the NodesController used to fetch nodes and execute node actions
+     *
      * @return NodesController
      */
     public NodesController getNodesController() {
@@ -73,6 +81,7 @@ public class PteroAdminAPI {
 
     /**
      * Get the LocationsController used to fetch locations and execute location actions
+     *
      * @return LocationsController
      */
     public LocationsController getLocationsController() {

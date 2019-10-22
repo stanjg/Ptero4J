@@ -2,10 +2,7 @@ package com.stanjg.ptero4j.controllers;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.PteroUserAPI;
-import com.stanjg.ptero4j.actions.PteroAction;
 import com.stanjg.ptero4j.actions.PteroVoidAction;
-import com.stanjg.ptero4j.controllers.Controller;
-import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.PteroUtils;
 import okhttp3.Response;
 import org.json.JSONObject;

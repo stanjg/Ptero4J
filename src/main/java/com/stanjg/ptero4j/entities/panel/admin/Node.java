@@ -35,14 +35,14 @@ public class Node {
     }
 
     private Node(PteroAdminAPI api, int id,
-                int locationId, int memory,
-                int memoryOverAllocation, int disk,
-                int diskOverAllocation, int uploadSize,
-                int daemonListen, int daemonSftp,
-                String name, String description,
-                String fqdn, String scheme,
-                String daemonBase, boolean isPublic,
-                boolean behindProxy) {
+                 int locationId, int memory,
+                 int memoryOverAllocation, int disk,
+                 int diskOverAllocation, int uploadSize,
+                 int daemonListen, int daemonSftp,
+                 String name, String description,
+                 String fqdn, String scheme,
+                 String daemonBase, boolean isPublic,
+                 boolean behindProxy) {
         this.api = api;
         this.id = id;
         this.locationId = locationId;

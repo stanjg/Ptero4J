@@ -6,7 +6,8 @@ public class CreationFeatureLimits {
 
     private int maxDatabases, maxAllocations;
 
-    public CreationFeatureLimits() { }
+    public CreationFeatureLimits() {
+    }
 
     public CreationFeatureLimits(int maxDatabases, int maxAllocations) {
         this.maxDatabases = maxDatabases;
@@ -23,12 +24,12 @@ public class CreationFeatureLimits {
         return maxDatabases;
     }
 
-    public int getMaxAllocations() {
-        return maxAllocations;
-    }
-
     public void setMaxDatabases(int maxDatabases) {
         this.maxDatabases = maxDatabases;
+    }
+
+    public int getMaxAllocations() {
+        return maxAllocations;
     }
 
     public void setMaxAllocations(int maxAllocations) {
