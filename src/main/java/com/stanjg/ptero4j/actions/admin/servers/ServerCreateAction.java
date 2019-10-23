@@ -10,6 +10,9 @@ import com.stanjg.ptero4j.util.HTTPMethod;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ServerCreateAction implements PteroAction<Server> {
 
     private JSONObject json;
@@ -73,6 +76,17 @@ public class ServerCreateAction implements PteroAction<Server> {
         JSONObject environments = getOrCreateJSONObject(json, "environment");
         environments.put(environment.getName(), environment.getValue());
         return this;
+    }
+
+    public ServerCreateAction setEnvironmentValues(List<CreationEnvironment> environments) {
+        JSONObject environmentsJSON = new JSONObject();
+        environments.forEach(environment -> environmentsJSON.put(environment.getName(), environment.getValue()));
+        json.put("environment", environmentsJSON.toString());
+        return this;
+    }
+
+    public ServerCreateAction setEnvironmentValues(CreationEnvironment... environments) {
+        return setEnvironmentValues(Arrays.asList(environments));
     }
 
     public ServerCreateAction setSkipScripts(boolean skipScripts) {
