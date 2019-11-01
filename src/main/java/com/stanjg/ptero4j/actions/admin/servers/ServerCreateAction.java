@@ -81,7 +81,7 @@ public class ServerCreateAction implements PteroAction<Server> {
     public ServerCreateAction setEnvironmentValues(List<CreationEnvironment> environments) {
         JSONObject environmentsJSON = new JSONObject();
         environments.forEach(environment -> environmentsJSON.put(environment.getName(), environment.getValue()));
-        json.put("environment", environmentsJSON.toString());
+        json.put("environment", environmentsJSON);
         return this;
     }
 
