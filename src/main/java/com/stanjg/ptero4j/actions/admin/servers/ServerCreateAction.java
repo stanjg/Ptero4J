@@ -2,12 +2,16 @@ package com.stanjg.ptero4j.actions.admin.servers;
 
 import com.stanjg.ptero4j.PteroAdminAPI;
 import com.stanjg.ptero4j.actions.PteroAction;
+import com.stanjg.ptero4j.entities.objects.server.creation.CreationEnvironment;
 import com.stanjg.ptero4j.entities.objects.server.creation.CreationFeatureLimits;
 import com.stanjg.ptero4j.entities.objects.server.creation.CreationServerLimits;
 import com.stanjg.ptero4j.entities.panel.admin.Server;
 import com.stanjg.ptero4j.util.HTTPMethod;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ServerCreateAction implements PteroAction<Server> {
 
@@ -39,6 +43,11 @@ public class ServerCreateAction implements PteroAction<Server> {
         return this;
     }
 
+    public ServerCreateAction setNestId(int id) {
+        json.put("nest", id);
+        return this;
+    }
+
     public ServerCreateAction setEggId(int id) {
         json.put("egg", id);
         return this;
@@ -59,8 +68,25 @@ public class ServerCreateAction implements PteroAction<Server> {
         return this;
     }
 
-    public ServerCreateAction setEnvironmentVariables() {
-        return this; // TODO
+    public ServerCreateAction addEnvironmentValue(String name, String value) {
+        return addEnvironmentValue(new CreationEnvironment(name, value));
+    }
+
+    public ServerCreateAction addEnvironmentValue(CreationEnvironment environment) {
+        JSONObject environments = getOrCreateJSONObject(json, "environment");
+        environments.put(environment.getName(), environment.getValue());
+        return this;
+    }
+
+    public ServerCreateAction setEnvironmentValues(List<CreationEnvironment> environments) {
+        JSONObject environmentsJSON = new JSONObject();
+        environments.forEach(environment -> environmentsJSON.put(environment.getName(), environment.getValue()));
+        json.put("environment", environmentsJSON);
+        return this;
+    }
+
+    public ServerCreateAction setEnvironmentValues(CreationEnvironment... environments) {
+        return setEnvironmentValues(Arrays.asList(environments));
     }
 
     public ServerCreateAction setSkipScripts(boolean skipScripts) {
@@ -68,8 +94,8 @@ public class ServerCreateAction implements PteroAction<Server> {
         return this;
     }
 
-    public ServerCreateAction setLimits(int memory, int swap, int disk, int io, int cpu) {
-        return setLimits(new CreationServerLimits(memory, swap, disk, io, cpu));
+    public ServerCreateAction setLimits(int disk, int memory, int swap, int io, int cpu) {
+        return setLimits(new CreationServerLimits(disk, memory, swap, io, cpu));
     }
 
     public ServerCreateAction setLimits(CreationServerLimits limits) {
