@@ -8,29 +8,29 @@ import java.util.Map;
 public class ServerContainer {
 
     private String startupCommand, image;
-    private boolean installed;
-    private Map<String, String> environmentVariables;
+    private int installed;
+    private Map<String, Object> environmentVariables;
 
     public ServerContainer(JSONObject json) {
         this(
                 json.getString("startup_command"),
                 json.getString("image"),
-                json.getBoolean("installed"),
+                json.getInt("installed"),
                 json.getJSONObject("environment")
         );
     }
 
-    private ServerContainer(String startupCommand, String image, boolean installed, JSONObject json) {
+    private ServerContainer(String startupCommand, String image, int installed, JSONObject json) {
         this.startupCommand = startupCommand;
         this.image = image;
         this.installed = installed;
         this.environmentVariables = getEnvironmentVariablesMap(json);
     }
 
-    private static Map<String, String> getEnvironmentVariablesMap(JSONObject json) {
-        Map<String, String> vars = new HashMap<>();
+    private static Map<String, Object> getEnvironmentVariablesMap(JSONObject json) {
+        Map<String, Object> vars = new HashMap<>();
         for (String key : json.keySet()) {
-            vars.put(key, json.getString(key));
+            vars.put(key, json.get(key));
         }
         return vars;
     }
@@ -44,10 +44,10 @@ public class ServerContainer {
     }
 
     public boolean isInstalled() {
-        return installed;
+        return installed == 1;
     }
 
-    public Map<String, String> getEnvironmentVariables() {
+    public Map<String, Object> getEnvironmentVariables() {
         return environmentVariables;
     }
 }
